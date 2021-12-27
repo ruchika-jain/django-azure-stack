@@ -1,0 +1,31 @@
+name: "Build a Python Django project"
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Start
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+          architecture: "x64"
+
+      - name: Create project
+        run: |
+          pip install django
+          django-admin startproject django-app .
+          pip freeze > requirements.txt
+      - name: Configure git
+        run: |
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+      - name: Commit code to repo
+        run: |
+          git add .
+          git commit -m "Generate framework code and initialize workflows"
+          git push
