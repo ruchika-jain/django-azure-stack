@@ -17,7 +17,7 @@ jobs:
       - name: Create project
         run: |
           pip install django
-          django-admin startproject django-app .
+          django-admin startproject django_app .
           pip freeze > requirements.txt
       - name: Configure git
         run: |
