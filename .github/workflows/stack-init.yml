@@ -18,7 +18,7 @@ jobs:
         run: |
           pip install django
           django-admin startproject django_app .
-        # pip freeze > requirements.txt
+          pip freeze > requirements.txt
       - name: Configure git
         run: |
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
