@@ -1,5 +1,7 @@
 name: django-stack-template
+
 description: This stack will help you create an awesome Django stack
+
 branding:
   icon: bell # https://feathericons.com/
   color: red # hex accepted
@@ -13,32 +15,34 @@ branding:
 # All inputs will be considered as non-secrets unless specified as **is_secret:true**
 # All inputs will be available for scripts/workflows run as part of stack init
 # Any input that is not explicitly configured as Repo/Environment secret will NOT be available in the new stack
-# inputs:
-  # - name: sample_integer_input
-  #   type: integer # other accepted - string/boolean
-  #   default: 2
-  #   description: This shows up in the form during consumption.
-  #   validvalues: 
-  #   - 2
-  #   - 3
-  #   - 4
-  #   - 5
-  #   - 6
 
-  # - name: secret
-  #   is-secret: true / false
+inputs:
+  - name: AZURE_APP_NAME
+    description: Enter the name of the Azure App which has been configured to host the website
+    is-secret: true
+    required: true
+    
+  - name: AZURE_WEBAPP_PUBLISH_PROFILE
+    description: Enter the Azure Publish profile. 
+    is-secret: true
+    required: true
 
 #-------------------------------------------------------------
-# configs:
+
+configs:
   # Meta data for creating the new repository
-  # repo-metadata:
-  #   parameters:
-  #     secrets: 
-  #     - name: sample_secret
-  #       value: ${{inputs.secret}} # example of a reference
-  #     topics:
-  #     - sample_topic_1
-  #     - sample_topic_2
+  repo-metadata:
+      parameters:
+        description: 'A Django website deployed in Azure App Service'
+        secrets: 
+          - name: AZURE_APP_NAME
+            value: ${{inputs.AZURE_APP_NAME}}
+          - name: AZURE_WEBAPP_PUBLISH_PROFILE
+            value: ${{inputs.AZURE_WEBAPP_PUBLISH_PROFILE}}
+        topics:
+        - django
+        - python
+        - azure
       
   # Branch Protection rules
   # branches:
@@ -51,21 +55,6 @@ branding:
   #         required-approving-review-count: 1 # integer
   #       allow-force-pushes: true / false
   #       allow-deletions: true / false
-
-  # Configure an environment
-  # environments: 
-  #   - name: staging
-  #     parameters: 
-  #       protected-branches: true / false
-  #       allowed-branch-rules:
-  #         - main/* # pattern similar to branch protection
-  #       wait-timer: 50 # in seconds
-  #       reviewers:
-  #         - name: torvalds # valid username of reviewer
-  #           type: User
-  #       secrets:
-  #         - name: SPN_ID
-  #           value: ${{inputs.secret}}
 
   # Security and configuration settings to be enabled/disabled
   # security:
@@ -87,4 +76,4 @@ branding:
 # This workflow file will NOT be part of the stack (new repo created). 
 # workflow could use the stack inputs using the notation : ${{ github.event.inputs.name }}
 init:
-  uses: "stack-init.yml" # you would have to create a workflow - .github/workflows/setup.yml
+  uses: "stack-init.yml" # you would have to create a workflow - .github/workflows/stack-init.yml
