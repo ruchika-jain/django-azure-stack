@@ -24,6 +24,10 @@ jobs:
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git config --global user.name "${{ github.actor }}"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          
+      - name: Add app URL to Allowed Hosts
+        run: |
+          sed -i "s/[]/['https://${{secrets.AZURE_APP_NAME}}.azurewebsites.net']" ./django_app/settings.py
       - name: Commit code to repo
         run: |
           git add .
