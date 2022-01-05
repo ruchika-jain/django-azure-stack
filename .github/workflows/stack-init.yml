@@ -27,39 +27,39 @@ jobs:
           
       - name: Add app URL to Allowed Hosts
         run: |
-          sed -i "s/\[]/['https:\/\/${{secrets.AZURE_APP_NAME}}.azurewebsites.net']/" ./django_app/settings.py
+          sed -i "s/\[]/['${{secrets.AZURE_APP_NAME}}.azurewebsites.net']/" ./django_app/settings.py
       - name: Commit code to repo
         run: |
           git add .
           git commit -m "Generate framework code and initialize workflows"
           git push
           
-#       - name: Deploy to Azure Web App
-#         id: deploy-to-webapp
-#         uses: azure/webapps-deploy@v2
-#         with:
-#           app-name: ${{ secrets.AZURE_APP_NAME }}
-#           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.AZURE_APP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           
       - name: Website URL
         run: |
           echo "Website URL: https://${{secrets.AZURE_APP_NAME}}.azurewebsites.net"
           
-#       - name: Wait for website to come online
-#         timeout-minutes: 5 
-#         id: get-url
-#         run: |
-#           echo "Waiting for the website to come alive..."
-#           URL="https://${{secrets.AZURE_APP_NAME}}.azurewebsites.net"
-#           sleep 20
-#           STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}\n" $URL)
-#           echo "STATUSCODE: $STATUS_CODE"
-#           while [ $STATUS_CODE -ne 200 ]
-#           do
-#             sleep 10
-#             STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}\n" $URL)
-#             echo "STATUSCODE: $STATUS_CODE"
-#           done
-#           echo "Website is up and running..."
-#           echo "Browse here: $URL"       
-#           echo "::set-output name=your_site::$URL"
+      - name: Wait for website to come online
+        timeout-minutes: 5 
+        id: get-url
+        run: |
+          echo "Waiting for the website to come alive..."
+          URL="https://${{secrets.AZURE_APP_NAME}}.azurewebsites.net"
+          sleep 20
+          STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}\n" $URL)
+          echo "STATUSCODE: $STATUS_CODE"
+          while [ $STATUS_CODE -ne 200 ]
+          do
+            sleep 10
+            STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}\n" $URL)
+            echo "STATUSCODE: $STATUS_CODE"
+          done
+          echo "Website is up and running..."
+          echo "Browse here: $URL"       
+          echo "::set-output name=your_site::$URL"
