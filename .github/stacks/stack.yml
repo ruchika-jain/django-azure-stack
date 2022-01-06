@@ -44,33 +44,6 @@ configs:
         - python
         - azure
       
-  # Branch Protection rules
-  # branches:
-  #   - name: release_v? #branch name or pattern you want to protect
-  #     parameters:
-  #       enforce-admins: true / false
-  #       required-pull-request-reviews:
-  #         dismiss-stale-reviews: true / false
-  #         require-code-owner-reviews: true / false
-  #         required-approving-review-count: 1 # integer
-  #       allow-force-pushes: true / false
-  #       allow-deletions: true / false
-
-  # Security and configuration settings to be enabled/disabled
-  # security:
-  #   parameters: 
-  #     vulnerability-alerts: true / false
-  #     automated-security-fixes: true # can be true only if vulnerability-alerts is true
-
-
-#-------------------------------------------------------------
-# GitHub Apps to be installed
-# just provide the slugs
-# github-apps:
-# - slug: sample1
-# - slug: sample2
-
-
 #-------------------------------------------------------------
 # Initialization workflow to run
 # This workflow file will NOT be part of the stack (new repo created). 
