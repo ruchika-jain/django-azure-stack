@@ -18,21 +18,21 @@ Deployment happens on Azure Cloud via Azure App Service.
 
 ## How to get AZURE_WEBAPP_PUBLISH_PROFILE? 🔑
 ```
-Login/Signup to Heroku -> Account Settings -> API Key
+Login to your Azure Portal -> Open the Azure App Service -> Get publish profile
 ```
-Check [this](https://help.heroku.com/PBGP6IDE/how-should-i-generate-an-api-key-that-allows-me-to-use-the-heroku-platform-api) out for more details on getting Heroku API Key.
+Check [this](https://docs.microsoft.com/en-us/visualstudio/azure/how-to-get-publish-profile-from-azure-app-service?view=vs-2022) out for more details on getting Publish Profile.
 
 ## App hosted URL would be:
 
 Once you create a repo out of this stack, you can find your website deployed at <azure_app_name>.azurewebsites.net.
 ```
-Example: APP_NAME input by user is: sample-website
-Hosted URL: https://www.sample-website.azurewebsites.net
+Example: APP_NAME input by user is: sample-app
+Hosted URL: https://sample-app.azurewebsites.net 
 ```
 
 ## Tech Details:
 - Python: 3.8
-- Django: 4.1
+- Django: 4.0.1
 
 
 
