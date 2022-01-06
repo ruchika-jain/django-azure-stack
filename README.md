@@ -23,8 +23,9 @@ Login/Signup to Heroku -> Account Settings -> API Key
 Check [this](https://help.heroku.com/PBGP6IDE/how-should-i-generate-an-api-key-that-allows-me-to-use-the-heroku-platform-api) out for more details on getting Heroku API Key.
 
 ## App hosted URL would be:
-```
+
 Once you create a repo out of this stack, you can find your website deployed at <azure_app_name>.azurewebsites.net.
+```
 Example: APP_NAME input by user is: sample-website
 Hosted URL: https://www.sample-website.azurewebsites.net
 ```
