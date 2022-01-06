@@ -1,7 +1,7 @@
 ## Django Stack
 You can now spin up a [Django](https://www.djangoproject.com/) app and deploy it to [Azure](https://azure.microsoft.com/en-in/) in seconds.
 
-Using this stack as template would create a new repository for codebase and dploy the Django app on Azure.
+Using this stack as template would create a new repository for the codebase and deploy the Django app on Azure.
 
 ## Prerequisites
 Having a Azure account with an active subscription(Yes, that's it!! )
