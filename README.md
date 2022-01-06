@@ -1,4 +1,4 @@
-## Django Stack
+## Django Stack 🌟
 You can now spin up a [Django](https://www.djangoproject.com/) app and deploy it to [Azure](https://azure.microsoft.com/en-in/) in seconds.
 
 Using this stack as template would create a new repository for the codebase and deploy the Django app on Azure.
