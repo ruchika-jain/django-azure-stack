@@ -6,6 +6,10 @@ jobs:
   build:
     name: Start
     runs-on: ubuntu-latest
+    environment:
+       name: development
+       url: ${{ steps.get-url.outputs.your_site }}
+    
     steps:
       - uses: actions/checkout@v2
       
