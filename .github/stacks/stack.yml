@@ -1,6 +1,6 @@
-name: django-stack-template
+name: django-azure-template
 
-description: This stack will help you create an awesome Django stack
+description: This stack will help you create an awesome Django stack and deploy to Azure
 
 branding:
   icon: bell # https://feathericons.com/
@@ -30,6 +30,7 @@ inputs:
 #-------------------------------------------------------------
 
 configs:
+
   # Meta data for creating the new repository
   repo-metadata:
       parameters:
@@ -43,6 +44,16 @@ configs:
         - django
         - python
         - azure
+        
+  # Configure an environment
+  environments:
+    - name: development
+      parameters:
+        protected-branches: false
+        allowed-branch-rules:
+          - main
+          - releases/*
+        
       
 #-------------------------------------------------------------
 # Initialization workflow to run
