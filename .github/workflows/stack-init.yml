@@ -34,9 +34,13 @@ jobs:
           git config --global user.name "${{ github.actor }}"
           git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           
+      - name: Print App Name
+        run: | 
+          echo "https://${{ github.event.inputs.AZURE_APP_NAME }}.azurewebsites.net"
+          
       - name: Add app URL to Allowed Hosts
         run: |
-          sed -i "s/\[]/['${{inputs.AZURE_APP_NAME}}.azurewebsites.net']/" ./django_app/settings.py
+          sed -i "s/\[]/['${{ github.event.inputs.AZURE_APP_NAME }}.azurewebsites.net']/" ./django_app/settings.py 
           
       - name: Commit code to repo
         run: |
@@ -48,16 +52,16 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: ${{ inputs.AZURE_APP_NAME }}
+          app-name: ${{ github.event.inputs.AZURE_APP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           
       - name: Website URL
         run: |
-          echo "Website URL: https://${{inputs.AZURE_APP_NAME}}.azurewebsites.net"
+          echo "Website URL: https://${{ github.event.inputs.AZURE_APP_NAME }}.azurewebsites.net"
           
       - name: Wait for website to come online
         env:
-            AZURE_APP_NAME: ${{ inputs.AZURE_APP_NAME }}
+            AZURE_APP_NAME: ${{ github.event.inputs.AZURE_APP_NAME }}
         timeout-minutes: 5 
         id: get-url
         run: |
