@@ -53,11 +53,13 @@ jobs:
           echo "Website URL: https://${{secrets.AZURE_APP_NAME}}.azurewebsites.net"
           
       - name: Wait for website to come online
+        env:
+            AZURE_APP_NAME: ${{ secrets.AZURE_APP_NAME }}
         timeout-minutes: 5 
         id: get-url
         run: |
           echo "Waiting for the website to come alive..."
-          URL="https://${{secrets.AZURE_APP_NAME}}.azurewebsites.net"
+          URL="https://${{ env.AZURE_APP_NAME }}.azurewebsites.net"
           sleep 20
           STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}\n" $URL)
           echo "STATUSCODE: $STATUS_CODE"
