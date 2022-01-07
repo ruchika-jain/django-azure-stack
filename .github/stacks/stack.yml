@@ -19,7 +19,7 @@ branding:
 inputs:
   - name: AZURE_APP_NAME
     description: Enter the name of the Azure App which has been configured to host the website
-    is-secret: true
+    is-secret: false
     required: true
     
   - name: AZURE_WEBAPP_PUBLISH_PROFILE
@@ -36,8 +36,8 @@ configs:
       parameters:
         description: 'A Django website deployed in Azure App Service'
         secrets: 
-          - name: AZURE_APP_NAME
-            value: ${{inputs.AZURE_APP_NAME}}
+#           - name: AZURE_APP_NAME
+#             value: ${{inputs.AZURE_APP_NAME}}
           - name: AZURE_WEBAPP_PUBLISH_PROFILE
             value: ${{inputs.AZURE_WEBAPP_PUBLISH_PROFILE}}
         topics:
