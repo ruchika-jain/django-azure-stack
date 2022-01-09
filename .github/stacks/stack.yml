@@ -6,16 +6,6 @@ branding:
   icon: bell # https://feathericons.com/
   color: red # hex accepted
 
-#-------------------------------------------------------------
-# All values needed to be provided/verified by the user should be defined as inputs.
-# Values can be provided using a values file (yaml/json/.env format) or from the UX.
-# Default values are defined by stack authors using **default: <Value>**
-# All inputs defined here are optional unless they are marked **required: true**
-# All inputs will be of String type by default unless specified as **type:boolean**
-# All inputs will be considered as non-secrets unless specified as **is_secret:true**
-# All inputs will be available for scripts/workflows run as part of stack init
-# Any input that is not explicitly configured as Repo/Environment secret will NOT be available in the new stack
-
 inputs:
   - name: AZURE_APP_NAME
     description: Enter the name of the Azure App which has been configured to host the website
@@ -27,17 +17,11 @@ inputs:
     is-secret: true
     required: true
 
-#-------------------------------------------------------------
-
 configs:
-
-  # Meta data for creating the new repository
   repo-metadata:
       parameters:
         description: 'A Django website deployed in Azure App Service'
         secrets: 
-#           - name: AZURE_APP_NAME
-#             value: ${{inputs.AZURE_APP_NAME}}
           - name: AZURE_WEBAPP_PUBLISH_PROFILE
             value: ${{inputs.AZURE_WEBAPP_PUBLISH_PROFILE}}
         topics:
@@ -45,7 +29,6 @@ configs:
         - python
         - azure
         
-  # Configure an environment
   environments:
     - name: development
       parameters:
@@ -53,11 +36,6 @@ configs:
         allowed-branch-rules:
           - main
           - releases/*
-        
       
-#-------------------------------------------------------------
-# Initialization workflow to run
-# This workflow file will NOT be part of the stack (new repo created). 
-# workflow could use the stack inputs using the notation : ${{ github.event.inputs.name }}
 init:
   uses: "stack-init.yml" # you would have to create a workflow - .github/workflows/stack-init.yml
